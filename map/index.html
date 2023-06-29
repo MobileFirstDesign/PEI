@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Map Charlottetown PEI</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Places to eat and things to do in Charlottetowm PEI">
+  <meta name="author" content="Mike Bryan">
+  <meta name="publisher" content="https://mfn.ca/">
+  <meta name="robots" content="index,follow">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#00539f"/>
+  <meta name="application-name" content="PEI-Eat-See">
+  <meta name="apple-mobile-web-app-title" content="PEI-Eat-See">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#00539f">
+  <link rel="apple-touch-icon" sizes="196x196" href="/img/maskable_384.png">
+  <link rel="apple-touch-startup-image" href="/img/apple-splash.png">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="/pei.webmanifest">
+
+    <style>
+        :root{
+    --sm-space:1rem;
+    --md-space:2rem;
+    --theme-color: rgb(0, 83, 159);
+      --clr-light: rgb(250, 250, 250);
+      --clr-dark: rgb(53, 54, 58);
+      --foreground: var(--clr-dark);
+      --background: var(--clr-light);
+      --image-filter: 0%;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --theme-color: rgb(0, 83, 159);
+        --background: var(--clr-dark);
+        --foreground: var(--clr-light);
+        --image-filter: grayscale(50%);
+      }
+    }
+    .darkmode {
+        --theme-color: rgb(0, 83, 159);
+        --background: var(--clr-dark);
+        --foreground: var(--clr-light);
+        --image-filter: 50%;
+    }
+    *, *::before, *::after {box-sizing: inherit;padding: 0;margin: 0;}
+html{
+    block-size:100%;
+}
+body{
+    min-block-size:100%;
+    margin:0;
+    display:flex;
+    flex-direction:column;
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;
+    background: var(--background);
+  }
+  header {
+    z-index: 10;
+    position: fixed;
+    width: 100%;
+    height: 30px;
+    background: var(--theme-color);
+    box-shadow: 0 2px 4px rgb(0 0 0 / 50%);
+}
+  .head {
+    max-width: 960px;
+    height: 30px;
+    margin: 0 auto;
+    display: flex;
+    color: var(--background);
+    align-items: center;
+    justify-content: space-between;
+}
+
+.target-area {
+    padding: 3px 12px;
+    cursor: pointer;
+}
+h1 {
+    font-size: 1rem;
+    line-height: 1.0;
+    color: var(--clr-light);
+}
+.icon {
+    fill: none;
+    stroke: var(--clr-light);
+    stroke-width: 2;
+    padding: 0 1rem;
+}
+.svg-circle {
+    fill: var(--foreground);
+    stroke: black;
+    stroke-width: 2px;
+}
+.svg-half {
+    fill: var(--background);
+}
+.dark-mode-toggle {
+    background: transparent;
+    border: transparent;
+}
+    .btn-toggle {padding:10px 10px 0 10px; background: transparent;border: transparent; cursor: pointer;}
+    .svg {
+    width: 24px;
+    height: 24px;
+    }
+      main {margin: 0 auto;};
+ 
+.street-map {
+  max-inline-size: 100%;
+  block-size: auto;
+  aspect-ratio: 1/2;
+  object-fit:contain;
+  object-position: top center;
+}
+    </style>
+</head>
+<body>
+  <header>
+    <nav class="head">
+        <a class="home" href="/" title="link to homepage">
+          <svg class="svg target-area">
+            <polyline class="icon" points="21 23, 14 23, 14 14, 10 14, 10 23 3 23, 3 10, 2 10, 12 0, 22 10, 21 10, 21 23"></polyline>
+          </svg>
+        </a>
+        <h1 class="text-center">Places to Eat</h1>
+        <button id="dark-mode-toggle" class="dark-mode-toggle" type="button" title="toggle dark theme"><!-- class="theme-toggle" onclick="btnToggle()"-->
+            <svg class="target-area" width="24px" height="24px">
+                <circle cx="12.5" cy="12.5" r="12.5" class="svg-circle"></circle>
+                <path d="M12.5,0 a1,1 0 0,0 0,25" class="svg-half"></path>
+            </svg>
+        </button>
+    </nav>
+  </header>
+<main>
+  <img class="street-map" src="map.webp" alt="street map of Charlettetown" width="480" height="960" >
+</main>
+<script>
+    if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('/sw_cached_pages.js').then(reg=>console.log('Service Worker: Registered')).catch(err=>console.log(`Service Worker: Error: ${err}`))})}
+</script>
+<script>
+  let darkMode = localStorage.getItem('darkMode'); 
+const darkModeToggle = document.querySelector('#dark-mode-toggle');
+const enableDarkMode = () => {
+  document.body.classList.add('darkmode');
+  localStorage.setItem('darkMode', 'enabled');
+}
+const disableDarkMode = () => {
+  document.body.classList.remove('darkmode');
+  localStorage.setItem('darkMode', null);
+}
+if (darkMode === 'enabled') {
+  enableDarkMode();
+}
+darkModeToggle.addEventListener('click', () => {
+  darkMode = localStorage.getItem('darkMode'); 
+  if (darkMode !== 'enabled') {
+    enableDarkMode();
+  } else {  
+    disableDarkMode(); 
+  }
+});
+</script>
+</body>
+</html>
