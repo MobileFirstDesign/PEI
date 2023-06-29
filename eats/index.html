@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Places to eat</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Places to eat and things to do in Charlottetowm PEI">
+  <meta name="author" content="Mike Bryan">
+  <meta name="publisher" content="https://mfn.ca/">
+  <meta name="robots" content="index,follow">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#00539f"/>
+  <meta name="application-name" content="PEI-Eat-See">
+  <meta name="apple-mobile-web-app-title" content="PEI-Eat-See">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#00539f">
+  <link rel="apple-touch-icon" sizes="196x196" href="/img/maskable_384.png">
+  <link rel="apple-touch-startup-image" href="/img/apple-splash.png">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="/pei.webmanifest">
+  
+    <style>
+            :root {
+      --theme-color: rgb(0, 83, 159);
+      --clr-light: rgb(250, 250, 250);
+      --clr-dark: rgb(53, 54, 58);
+      --foreground: var(--clr-dark);
+      --background: var(--clr-light);
+      --image-filter: 0%;
+      --black: #3a3a3a;
+  --white: #fff;
+  --green: #49b293;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --theme-color: rgb(0, 83, 159);
+        --background: var(--clr-dark);
+        --foreground: var(--clr-light);
+        --image-filter: grayscale(50%);
+      }
+    }
+    .darkmode {
+        --theme-color: rgb(0, 83, 159);
+        --background: var(--clr-dark);
+        --foreground: var(--clr-light);
+        --image-filter: 50%;
+    }
+    *, *::before, *::after {box-sizing: inherit;padding: 0;margin: 0;}
+    html {font-size: 20px;line-height: 1.7;font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;height: 100%;font-weight: 400;}
+    body {padding:0;min-height: 100%; background:var(--background);}
+    header {
+    z-index: 10;
+    position: fixed;
+    width: 100%;
+    height: 30px;
+    background: var(--theme-color);
+    box-shadow: 0 2px 4px rgb(0 0 0 / 50%);
+}
+.head {
+    max-width: 960px;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    color: var(--clr-light);
+    align-items: center;
+    justify-content: space-between;
+}
+.home {
+    padding-top: 8px;
+}
+.target-area {
+    padding: 3px 12px;
+    cursor: pointer;
+}
+h1 {
+    font-size: 1rem;
+    line-height: 1.0;
+}
+.icon {
+    fill: none;
+    stroke: var(--clr-light);
+    stroke-width: 2;
+}
+.svg-circle {
+    fill: var(--foreground);
+    stroke: black;
+    stroke-width: 2px;
+}
+.svg-half {
+    fill: var(--background);
+}
+.dark-mode-toggle {
+    background: transparent;
+    border: transparent;
+}
+    .btn-toggle {padding:10px 10px 0 10px; background: transparent;border: transparent; cursor: pointer;}
+    main {max-width:960px;/*padding-top:60px;*/margin:0 auto;font-size: 1rem;line-height: 1.2;}
+    .svg {
+    width: 24px;
+    height: 24px;
+}
+    section { max-width: 650px;margin: 0 auto; padding-bottom: 1rem;}
+    a {text-decoration: none;}
+    article {
+        display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid;
+      padding: 0.5rem;
+      color: var(--foreground);
+    } 
+    :root {
+      --star-size: 20px;
+      --star-color: #fff;
+      --star-background: #fc0;
+    }
+    
+    .Stars {
+      --percent: calc(var(--rating) / 5 * 100%);
+      display: inline-block;
+      font-size: var(--star-size);
+      font-family: Times;
+      line-height: 1;
+    }
+    .Stars::before {
+      content: "★★★★★";
+      letter-spacing: 1px;
+      background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  
+      img {
+        width:100%;
+        height:auto;
+        display: block;
+        padding-top:0.5rem;
+        filter: grayscale(var(--image-filter));
+      }
+      .foot {
+    text-align: center;
+    font-size: 1rem;
+    padding-top: 2rem;
+    color: var(--foreground);
+}
+/*.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}*/
+/*input[type="radio"] {
+  position: absolute;
+  left: -9999px;
+}*/
+/* FILTERS
+––––––––––––––––––––––––––––––––––––––––––––––––– */
+.filters {
+  text-align: center;
+ /* margin-bottom: 2rem;*/
+ position:sticky;
+ top: 28px;
+ background-color: white;
+ z-index: 2;
+}
+
+.filters * {
+  display: inline-block;
+}
+
+.filters label {
+  /*padding: 0.5rem 1rem;*/
+  margin-bottom: 0.25rem;
+  border-radius: 2rem;
+  min-width: 50px;
+  line-height: normal;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.filters label:hover {
+  background: var(--green);
+  color: var(--white);
+}
+
+/* FILTERING RULES
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+[value="All"]:checked ~ .filters [for="All"],
+[value="Sea"]:checked ~ .filters [for="Sea"],
+[value="Steak"]:checked ~ .filters [for="Steak"],
+[value="Fast"]:checked ~ .filters [for="Fast"],
+[value="Asian"]:checked ~ .filters [for="Asian"],
+[value="Italiam"]:checked ~ .filters [for="Italian"],
+[value="Indian"]:checked ~ .filters [for="Indian"] {
+  background: var(--green);
+  color: var(--white);
+}
+
+[value="All"]:checked ~ .posts [data-category] {
+  display: block;
+}
+
+[value="Sea"]:checked ~ .posts .post:not([data-category~="Sea"]),
+[value="Steak"]:checked ~ .posts .post:not([data-category~="Steak"]),
+[value="Fast"]:checked ~ .posts .post:not([data-category~="Fast"]),
+[value="Asian"]:checked ~ .posts .post:not([data-category~="Asian"]),
+[value="Italian"]:checked ~ .posts .post:not([data-category~="Italian"]),
+[value="Indian"]:checked ~ .posts .post:not([data-category~="Indian"]) {
+  display: none;
+}
+    </style>
+
+</head>
+<body>
+  <header>
+    <nav class="head">
+        <a class="home" href="/" title="link to homepage">
+          <svg class="svg target-area">
+            <polyline class="icon" points="21 23, 14 23, 14 14, 10 14, 10 23 3 23, 3 10, 2 10, 12 0, 22 10, 21 10, 21 23"></polyline>
+          </svg>
+        </a>
+        <h1 class="text-center">Places to Eat</h1>
+        <button id="dark-mode-toggle" class="dark-mode-toggle" type="button" aria-label="toggle dark or light theme">
+            <svg class="target-area" width="24px" height="24px">
+                <circle cx="12.5" cy="12.5" r="12.5" class="svg-circle"></circle>
+                <path d="M12.5,0 a1,1 0 0,0 0,25" class="svg-half"></path>
+            </svg>
+        </button>
+    </nav>
+  </header>
+<div class="container">
+  <input type="radio" id="All" name="categories" value="All" checked>
+  <input type="radio" id="Sea" name="categories" value="Sea">
+  <input type="radio" id="Steak" name="categories" value="Steak">
+  <input type="radio" id="Fast" name="categories" value="Fast">
+  <input type="radio" id="Asian" name="categories" value="Asian">
+  <input type="radio" id="Italian" name="categories" value="Italian">
+  <input type="radio" id="Indian" name="categories" value="Indian">
+<nav class="filters">
+  <label for="All">All</label>
+  <label for="Sea">Sea</label>
+  <label for="Steak">Steak</label>
+  <label for="Fast">Fast</label>
+  <label for="Asian">Asian</label>
+  <label for="Italian">Italian</label>
+  <label for="Indian">Indian</label>
+</nav>
+<main class="posts" id="eatout"></main>
+</div>
+<footer>
+  <p class="foot">© 2016-<span id="print-year">2021</span> <a  class="foot" target="_blank" rel="noopener" href="https://mobilefirstdesign.ca/">Mobile First Design</a></p>
+</footer>
+  <script>
+
+    let dine = [
+{"name": "Taste of India",
+  "stars": "4.2",
+  "reviews": 1566,
+  "cost": "$$",
+  "type": "Indian",
+  "location": "129 Kent",
+  "open": "11:30 a.m.",
+  "comment": "Informal restaurant whipping up familiar meat, seafood & veggie dishes, plus biryani & curries",
+  "pic": "img2",
+  "option": "",
+  "url": "http://www.tasteofindiapei.ca/"
+},
+{"name": "Cafe Thomas Martin",
+  "stars": "4.9",
+  "reviews": 38,
+  "cost": "$",
+  "type": "Fast",
+  "location": "134 Kent, 2nd floor, confederation court mall",
+  "open": "8am - 4pm",
+  "comment": "A small local restaurant with great service, food, and overall experience! ",
+  "pic": "img11",
+  "option": "Dine-in· No delivery",
+  "url": "https://cafethomasmartin.ca/"
+},
+{"name": "NON LA CAFE",
+  "stars": "4.8",
+  "reviews": 32,
+  "cost": "$",
+  "type": "Sea",
+  "location": "92 Kent",
+  "open": "16:00 - 20:00",
+  "comment": "Delicious food, all vegetarian, great price and friendly people",
+  "pic": "img4",
+  "option": "Dine-in· No delivery",
+  "url": "https://nonlacafe.ca/"
+},
+{"name": "Chambers Restaurant & Bar",
+  "stars": "4.1",
+  "reviews": 15,
+  "cost": "$$",
+  "type": "Sea",
+  "location": "75 Kent",
+  "open": "	7am-1pm, 5-9pm",
+  "comment": "Part of Rodd Hotel",
+  "pic": "img5",
+  "option": "Dine-in· No delivery",
+  "url": "https://roddvacations.com/restaurant/chambers-restaurant/"
+},
+{"name": "Hopyard",
+  "stars": "4.6",
+  "reviews": 1213,
+  "cost": "$$",
+  "type": "Fast",
+  "location": "151 Kent",
+  "open": "	11:30am-11pm",
+  "comment": "The cider and vegan burger on a gluten-free bun was delicious",
+  "pic": "img6",
+  "option": "Dine-in· No delivery",
+  "url": "http://hopyard.ca/charlottetown/"
+},
+{"name": "Abbiocco Ristorante",
+  "stars": "4.2",
+  "reviews": 95,
+  "cost": "$$",
+  "type": "Italian",
+  "location": "150 Kent",
+  "open": "	11:30am-10pm",
+  "comment": "Featuring Italy-inspired meals of the highest qualit",
+  "pic": "img7",
+  "option": "Dine-in· No delivery",
+  "url": "https://abbiocco.ca/"
+},
+{"name": "Hunter's Ale House",
+  "stars": "4.2",
+  "reviews": 1365,
+  "cost": "$$",
+  "type": "Steak",
+  "location": "185 Kent",
+  "open": "	11am-2am",
+  "comment": "Unfussy joint featuring steak, seafood & poutine, with live indie music, plus two outdoor patios",
+  "pic": "img8",
+  "option": "Dine-in· No delivery",
+  "url": "https://huntersalehouse.com/"
+},
+{"name": "Beer Garden",
+  "stars": "4.3",
+  "reviews": 303,
+  "cost": "$$",
+  "type": "Fast",
+  "location": "190 Kent",
+  "open": "4pm-12pm",
+  "comment": "Great place with good food and a great selection of beer and drinks",
+  "pic": "img9",
+  "option": "Dine-in· No delivery",
+  "url": "https://beergardenpei.com/"
+},
+{"name": "Redwater Rustic Grille",
+  "stars": "4.2",
+  "reviews": 237,
+  "cost": "$$",
+  "type": "Sea",
+  "location": "123 Grafton St",
+  "open": "7am-9pm",
+  "comment": "Redwater Rustic Grille is centrally located in downtown Charlottetown, inside the lobby of The Holman Grand Hotel.",
+  "pic": "img10",
+  "option": "Dine-in· No delivery",
+  "url": "https://www.redwatergrille.com/"
+},
+{"name": "subway",
+  "stars": " ",
+  "reviews": 0,
+  "cost": "$",
+  "type": "Fast",
+  "location": "Confederation Court Mall",
+  "open": "9am-9pm",
+  "comment": "brings new bold flavors along with old favorites to satisfied guests every day",
+  "pic": "img11",
+  "option": "Dine-in· No delivery",
+  "url": "https://www.subway.com/en-CA"
+},
+{"name": "Kim Chi & Sushi",
+  "stars": " ",
+  "reviews": 0,
+  "cost": "$",
+  "type": "Asian",
+  "location": "Confederation Court Mall",
+  "open": "9am-9pm",
+  "comment": "They have a large menu and offer a great variety of Korean and Japanese cuisine.",
+  "pic": "img11",
+  "option": "Dine-in· No delivery",
+  "url": ""
+},
+{"name": "Hojo's Japanese Cuisine",
+  "stars": "4.5",
+  "reviews": 198,
+  "cost": "$$",
+  "type": "Asian",
+  "location": "Confederation Court Mall",
+  "open": "12-2pm, 4:30-8pm",
+  "comment": "offers an unparalleled dining experience that showcases traditional Japanese dishes prepared using the best ingredients.",
+  "pic": "img11",
+  "option": "Dine-in· No delivery",
+  "url": "https://hojosjapanese.com/"
+},
+{"name": "McDonald's",
+  "stars": "3.7 ",
+  "reviews": 1400,
+  "cost": "$",
+  "type": "Fast",
+  "location": "427 University Ave",
+  "open": "6am-12pm",
+  "comment": "24 hour drive through",
+  "pic": "img14",
+  "option": "Dine-in· No delivery",
+  "url": "https://www.mcdonalds.com/ca/"
+},
+{"name": "Tim Hortons",
+  "stars": "4 ",
+  "reviews": 371,
+  "cost": "$",
+  "type": "Fast",
+  "location": "435 University Ave",
+  "open": "24 hours",
+  "comment": "Coffee was great and washed down an everything toasted bagel with cream cheese. All good.",
+  "pic": "img15",
+  "option": "Dine-in· No delivery",
+  "url": "https://www.timhortons.ca/"
+},
+{"name": "M's Kitchen",
+  "stars": "4.9 ",
+  "reviews": 50,
+  "cost": "$",
+  "type": "Asian",
+  "location": "18 Grafton St",
+  "open": "	11:30am.-8pm",
+  "comment": "There food, service and ambience of the dining room, everything is super nice.",
+  "pic": "img16",
+  "option": "Dine-in· No delivery",
+  "url": "https://www.facebook.com/MayDeliRestaurant/"
+},
+{"name": "The Shed Coffee",
+  "stars": "4.9",
+  "reviews": 55,
+  "cost": "$",
+  "type": "Fast",
+  "location": "99 Pownal St",
+  "open": "	9:30am-4:30pm",
+  "comment": "We'll bring the cozy cafe to spark your creativity and the refreshing taste to fuel your next adventure.",
+  "pic": "img17",
+  "option": "Dine-in· No delivery",
+  "url": "https://theshedcoffee.net/"
+},
+{"name": "Pilot House",
+  "stars": "4.5",
+  "reviews": 705,
+  "cost": "$",
+  "type": "Fast",
+  "location": "70 Grafton St",
+  "open": "	11:30am-10pm",
+  "comment": "Cozy outfit with wood beams & exposed–brick walls offering gourmet pub grub, steaks & spirits.",
+  "pic": "img18",
+  "option": "Dine-in· No delivery",
+  "url": "https://thepilothouse.ca/"
+},
+{"name": "Leonhard's Café and Restaurant",
+  "stars": "4.7",
+  "reviews": 656,
+  "cost": "$",
+  "type": "Fast",
+  "location": "142 Great George Street",
+  "open": "	9am-4pm",
+  "comment": "Made daily from scratch, using only natural flavourings free of additives, preservatives and artificial flavours.",
+  "pic": "img19",
+  "option": "Dine-in· No delivery",
+  "url": "https://leonhards.ca/"
+},
+{"name": "Alexandra's Pizza",
+  "stars": "4.1",
+  "reviews": 274,
+  "cost": "$",
+  "type": "Italian",
+  "location": "165 Prince St",
+  "open": "	11am-1am",
+  "comment": "While Alexandra's initially became known for its poutine and large variety of delicious pizza combinations (especially the fresh hot pizza slices available into the wee hours of the morning), customers soon started to appreciate the extensive selection of other menu items.",
+  "pic": "img20",
+  "option": "Dine-in· No delivery",
+  "url": "https://www.alexandraspizza.com/"
+},
+{"name": "Casa Mia Downtown",
+  "stars": "4.2",
+  "reviews": 775,
+  "cost": "$$",
+  "type": "Italian",
+  "location": "131 Queen St",
+  "open": "	8am-9pm",
+  "comment": "Low-key, earth-toned cafe preparing breakfast, sandwiches, salads & locally roasted coffee.",
+  "pic": "img21",
+  "option": "Dine-in· No delivery",
+  "url": "https://downtown.casamiapei.ca"
+},
+{"name": "Brickhouse Kitchen & Bar",
+  "stars": "4.4",
+  "reviews": 542,
+  "cost": "$$",
+  "type": "Fast",
+  "location": "125 Sydney St",
+  "open": "4pm-9pm",
+  "comment": "Hip spot in an 1800s warehouse featuring creative comfort food & an upstairs cocktail lounge.",
+  "pic": "img22",
+  "option": "Dine-in· No delivery",
+  "url": "https://brickhousepei.com/"
+},
+{"name": "Gaia's Urban Eatery",
+  "stars": "4.8",
+  "reviews": 124,
+  "cost": "$$",
+  "type": "Sea",
+  "location": "62 Queen St",
+  "open": "11am-7pm",
+  "comment": "Featuring an irresistibly diverse menu of international vegetarian and vegan dishes.",
+  "pic": "img23",
+  "option": "Dine-in· No delivery",
+  "url": "http://www.gaias.ca/"
+},
+{"name": "Founders' Food Hall & Market",
+  "stars": "4.7",
+  "reviews": 269,
+  "cost": "$$",
+  "type": "Fast",
+  "location": "6 Prince St",
+  "open": "10am-8pm",
+  "comment": "Shop, Eat and Drink with us",
+  "pic": "img24",
+  "option": "Dine-in· No delivery",
+  "url": "https://foundersfoodhall.com/"
+},
+{"name": "Salt & Sol Restaurant",
+  "stars": "4.5",
+  "reviews": 226,
+  "cost": "$$",
+  "type": "Sea",
+  "location": "2 Pownal St ",
+  "open": "11am-10pm",
+  "comment": "Our Island is exploding with flavor. PEI Fishermen offer the best quality when it comes to seafood.",
+  "pic": "img25",
+  "option": "Dine-in· No delivery",
+  "url": "http://saltandsolpei.ca/"
+},
+{"name": "Merchantman Fresh Seafood & Oyster Bar",
+  "stars": "4.4",
+  "reviews": 1274,
+  "cost": "$$",
+  "type": "Sea",
+  "location": "23 Queen St",
+  "open": "11:30am-9pm",
+  "comment": "Rustic, brick-accented restaurant offering a seafood-focused Canadian menu & outdoor seating",
+  "pic": "img26",
+  "option": "Dine-in· No delivery",
+  "url": "http://merchantman.ca/"
+},
+{"name": "Piatto Pizzeria + Enoteca",
+  "stars": "4.5",
+  "reviews": 782,
+  "cost": "$$",
+  "type": "Italian",
+  "location": "45 Queen St",
+  "open": "11:30am-9pm",
+  "comment": "authentic italian pizza",
+  "pic": "img27",
+  "option": "Dine-in· No delivery",
+  "url": "https://www.piattopizzeria.com/"
+},
+{"name": "Water St. Fish & Chips",
+  "stars": "4.4",
+  "reviews": 315,
+  "cost": "$$",
+  "type": "Sea",
+  "location": "73 Water St",
+  "open": "11:30am-8pm",
+  "comment": "Old-fashioned standby with an intimate seating area & outdoor tables serving seafood & Chinese fare.",
+  "pic": "img28",
+  "option": "Dine-in· No delivery",
+  "url": "https://waiteriowaterst.wixsite.com/water-street-fish"
+},
+{"name": "Brakish",
+  "stars": "4.0",
+  "reviews": 106,
+  "cost": "$$",
+  "type": "Sea",
+  "location": "2 Lower Water St",
+  "open": "4:30pm-10:30pm",
+  "comment": "Seasonal restaurant featuring local mussels, clams, lobster & outdoor seating with harbor views.",
+  "pic": "img29",
+  "option": "Dine-in· No delivery",
+  "url": "https://m.facebook.com/BrakishPEI/?_se_imp=0MFZ7Awzd5RCuqDUf"
+},
+{"name": "Peakes Quay Restaurant & Bar",
+  "stars": "4.3",
+  "reviews": 841,
+  "cost": "$$",
+  "type": "Sea",
+  "location": "11 Great George St",
+  "open": "11:30am-10pm",
+  "comment": "Seasonal restaurant featuring local mussels, clams, lobster & outdoor seating with harbor views.",
+  "pic": "img30",
+  "option": "Dine-in· No delivery",
+  "url": "https://m.facebook.com/BrakishPEI/?_se_imp=0MFZ7Awzd5RCuqDUf"
+},
+{"name": "COWS Peakes",
+  "stars": "4.5",
+  "reviews": 283,
+  "cost": "$$",
+  "type": "Fast",
+  "location": "Great George St",
+  "open": "11am-6pm",
+  "comment": "range of ice cream cones.",
+  "pic": "img31",
+  "option": "Dine-in· No delivery",
+  "url": "https://cows.ca/"
+},
+{"name": "Lobster On The Wharf Restaurant",
+  "stars": "4.0",
+  "reviews": 1085,
+  "cost": "$$",
+  "type": "Sea",
+  "location": "2 Prince St",
+  "open": "11am-8pm",
+  "comment": "Waterfront eatery & market providing a wide range of familiar seafood dishes in a casual atmosphere.",
+  "pic": "img32",
+  "option": "Dine-in· No delivery",
+  "url": "https://www.lobsteronthewharf.com/"
+},
+{"name": "Big Burger",
+  "stars": "4.4",
+  "reviews": 79,
+  "cost": "$$",
+  "type": "Fast",
+  "location": "6 Prince St -FOUNDERS' FOOD HALL",
+  "open": "11am-8pm",
+  "comment": "Made fresh daily from 100% local PEI beef, BIG BURGERs are cooked to order",
+  "pic": "img24",
+  "option": "Dine-in· No delivery",
+  "url": "https://www.bigburger.me/"
+},
+{"name": "The Cork and Cast",
+  "stars": "4.6",
+  "reviews": 85,
+  "cost": "$$",
+  "type": "Sea",
+  "location": "1 Weymouth St",
+  "open": "11am-8pm",
+  "comment": "PEI's Floating Restaurant offering FRESH local cuisine",
+  "pic": "img34",
+  "option": "Dine-in· No delivery",
+  "url": "https://www.thecorkandcast.com/"
+},
+{"name": "Saigon Cuisine PEI",
+  "stars": "4.6",
+  "reviews": 167,
+  "cost": "$$",
+  "type": "Asian",
+  "location": "35 Prince St",
+  "open": "11:30am-8pm",
+  "comment": "Saigon Cuisine mostly as a cultural and traditional point of view and aims to explore the cultural aspects of Vietnam.",
+  "pic": "img35",
+  "option": "Dine-in· No delivery",
+  "url": "https://saigoncuisine.co/"
+},
+{"name": "Swiss Chalet",
+  "stars": "3.4",
+  "reviews": 637,
+  "cost": "$$",
+  "type": "Fast",
+  "location": "359 University Ave",
+  "open": "11am-10pm",
+  "comment": "We only use fresh, grain-fed, preservative-free chickens, raised by a Canadian Farmer.",
+  "pic": "img3",
+  "option": "Dine-in· No delivery",
+  "url": "https://www.swisschalet.com/"
+}
+
+
+        ]
+        for (let i = 0; i < dine.length; i++) {
+        document.getElementById('eatout').innerHTML += `
+        <section class="post" data-category="${dine[i].type}">
+    <a href="${dine[i].url}" rel="noopener" target="_blank">
+      <article>
+        <div>
+            <strong>${dine[i].name}</strong> 
+            <svg height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><polygon points="23 1 23 8 15 1"  /><line x1="20" y1="4" x2="12" y2="12" stroke="blue" /><polyline points="10 4 4 4 4 20 20 20 20 12" stroke="blue" fill="none"/></svg></br>
+            ${dine[i].stars} <span class="Stars" style="--rating: ${dine[i].stars};" aria-label="Rating of this restaurant is ${dine[i].stars} out of 5."></span> (${dine[i].reviews}) - ${dine[i].cost} - ${dine[i].type}<br>
+          ${dine[i].location}<br>
+          Opens ${dine[i].open}<br>
+          ${dine[i].comment}<br>
+          ${dine[i].option}
+
+          <img src="${dine[i].pic}.webp" loading="lazy" alt="${dine[i].name}, Guelph" width="160" height="90">
+        </div>
+      </article>
+    </a>      
+  </section>
+
+        `;  
+}
+
+    let darkMode = localStorage.getItem('darkMode'); 
+const darkModeToggle = document.querySelector('#dark-mode-toggle');
+const enableDarkMode = () => {
+  document.body.classList.add('darkmode');
+  localStorage.setItem('darkMode', 'enabled');
+}
+const disableDarkMode = () => {
+  document.body.classList.remove('darkmode');
+  localStorage.setItem('darkMode', null);
+}
+if (darkMode === 'enabled') {
+  enableDarkMode();
+}
+darkModeToggle.addEventListener('click', () => {
+  darkMode = localStorage.getItem('darkMode'); 
+  if (darkMode !== 'enabled') {
+    enableDarkMode();
+  } else {  
+    disableDarkMode(); 
+  }
+});
+let currentYear = new Date().getFullYear();
+document.getElementById("print-year").innerHTML = currentYear;
+  </script>
+
+</body>
+</html>
