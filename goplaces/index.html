@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Place to seee</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Places to eat and things to do in Charlottetowm PEI">
+  <meta name="author" content="Mike Bryan">
+  <meta name="publisher" content="https://mfn.ca/">
+  <meta name="robots" content="index,follow">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#00539f"/>
+  <meta name="application-name" content="PEI-Eat-See">
+  <meta name="apple-mobile-web-app-title" content="PEI-Eat-See">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#00539f">
+  <link rel="apple-touch-icon" sizes="196x196" href="/img/maskable_384.png">
+  <link rel="apple-touch-startup-image" href="/img/apple-splash.png">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="/pei.webmanifest">
+  <style>
+      :root{
+    --sm-space:1rem;
+    --md-space:2rem;
+    --theme-color: rgb(0, 83, 159);
+      --clr-light: rgb(250, 250, 250);
+      --clr-dark: rgb(53, 54, 58);
+      --foreground: var(--clr-dark);
+      --background: var(--clr-light);
+      --image-filter: 0%;
+    }
+
+/*    @media (prefers-color-scheme: dark) {
+      :root {
+        --theme-color: rgb(0, 83, 159);
+        --background: var(--clr-dark);
+        --foreground: var(--clr-light);
+        --image-filter: grayscale(50%);
+      }
+    }
+    .darkmode {
+        --theme-color: rgb(0, 83, 159);
+        --background: var(--clr-dark);
+        --foreground: var(--clr-light);
+        --image-filter: 50%;
+    }*/
+    *, *::before, *::after {box-sizing: inherit;padding: 0;margin: 0;}
+html{
+    block-size:100%;
+}
+body{
+    min-block-size:100%;
+    margin:0;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:var(--md-space);
+    /*-webkit-padding-before:calc(var(--md-space) * 2);
+    padding-block-start:calc(var(--md-space) * 2);*/
+    -webkit-padding-after:var(--md-space);
+    padding-block-end:var(--md-space);
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;
+    /*background: var(--background);*/
+  }
+.head {
+    max-width: 960px;
+    height: 30px;
+    margin: 0 auto;
+    display: flex;
+    /*color: var(--background);*/
+    align-items: center;
+    justify-content: space-between;
+}
+
+.target-area {
+    padding: 3px 12px;
+    cursor: pointer;
+}
+h1 {
+    font-size: 1rem;
+    line-height: 1.0;
+    color: var(--clr-light);
+}
+.icon {
+    fill: none;
+    stroke: var(--clr-light);
+    stroke-width: 2;
+    padding: 0 1rem;
+}
+.svg-circle {
+    fill: var(--foreground);
+    stroke: black;
+    stroke-width: 2px;
+}
+.svg-half {
+    fill: var(--background);
+}
+/*.dark-mode-toggle {
+    background: transparent;
+    border: transparent;
+}
+    .btn-toggle {padding:10px 10px 0 10px; background: transparent;border: transparent; cursor: pointer;}
+*/    .svg {
+    width: 24px;
+    height: 24px;
+}
+
+.pile {display: grid;place-content: center; border-radius: 50%; padding: 5px 4px;}
+.pile > * {grid-area: 1/1;}
+#sun {display: none;}
+#moon {display: block;}
+
+section{
+    --gap:var(--md-space);
+    display:grid;
+    gap:var(--gap)
+}
+
+section>header {
+    background: var(--theme-color);
+}
+section>header>:is(h2,h3){
+    margin:0
+}
+.horizontal-media-scroller{
+    --size:300px; /*150*/
+    display:grid;
+    grid-auto-flow:column;
+    gap:calc(var(--gap)/ 2);
+    margin:0;
+    -webkit-padding-start:var(--gap);
+    padding-inline-start:var(--gap);
+    -webkit-padding-end:var(--gap);
+    padding-inline-end:var(--gap);
+    -webkit-padding-before:calc(var(--gap)/ 2);
+    padding-block-start:calc(var(--gap)/ 2);
+    -webkit-padding-after:calc(var(--gap)/ 2);
+    padding-block-end:calc(var(--gap)/ 2);
+    overflow-x:auto;
+    overscroll-behavior-inline:contain;
+    -ms-scroll-snap-type:inline mandatory;
+    scroll-snap-type:inline mandatory;
+    scroll-padding-left:var(--gap);
+    scroll-padding-right:var(--gap);
+    scroll-padding-inline:var(--gap);
+    /*background: var(--background);*/
+}
+@media (prefers-reduced-motion:no-preference){
+    .horizontal-media-scroller{
+        scroll-behavior:smooth
+    }
+}
+.horizontal-media-scroller>li{
+    display:inline-block
+}
+.horizontal-media-scroller>li:last-of-type figure{
+    position:relative
+}
+.horizontal-media-scroller>li:last-of-type figure::after{
+    content:"";
+    position:absolute;
+    inline-size:var(--gap);
+    block-size:100%;
+    inset-block-start:0;
+    inset-inline-end:calc(var(--gap) * -1)
+}
+.horizontal-media-scroller figure{
+    scroll-snap-align:start
+}
+.horizontal-media-scroller a{
+    display:inline-block;
+    text-decoration:none;
+    color:inherit;
+    outline-offset:12px
+}
+.horizontal-media-scroller a:focus{
+    outline-offset:7px
+}
+@media (prefers-reduced-motion:no-preference){
+    .horizontal-media-scroller a{
+        transition:outline-offset .25s ease
+    }
+}
+
+figure{
+    display:grid;
+    gap:calc(var(--gap)/ 2);
+    margin:0;
+    cursor:pointer;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none
+}
+
+figure>picture{
+    inline-size:var(--size);
+    block-size:var(--size)
+}
+figure img{
+    inline-size:100%;
+    block-size:100%;
+    -o-object-fit:cover;
+    object-fit:cover;
+    border-radius:1ex;
+    overflow:hidden;
+    background-image:linear-gradient(to bottom,#666,#333);
+    filter: grayscale(var(--image-filter));
+}
+figure>figcaption{
+    font-size:1.75rem;
+    font-weight:300;
+    word-break:break-word;
+    font-family:blokk;
+    /*color: var(--foreground);*/
+}
+
+
+
+      img {
+            display: block;
+            width:100%;
+            height: auto;
+        }
+
+@media only screen and (min-width: 959px) {
+body { max-width: 960px; margin:0 auto;}
+/*.line-clamp {-webkit-line-clamp: 9;}*/
+}
+picture { position: relative; }
+picture img { display: block; }
+
+.svg-icon {fill:none; stroke: currentColor;}
+footer {font-size: 1rem; color: var(--foreground); margin: 0 auto;}
+
+  </style>
+</head>
+<body>
+  <section>
+
+  <header>
+    <nav class="head">
+      <a class="home" href="/" title="link to homepage">
+        <svg class="svg target-area">
+          <polyline class="icon" points="21 23, 14 23, 14 14, 10 14, 10 23 3 23, 3 10, 2 10, 12 0, 22 10, 21 10, 21 23"></polyline>
+        </svg>
+      </a>
+      <h1 class="text-center">Places to go</h1>
+      <button  class="pile" id="toggle-mode-button" aria-label="toggle dark or light theme">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" id="moon" viewBox="0 0 16 16">
+        <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278zM4.858 1.311A7.269 7.269 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.316 7.316 0 0 0 5.205-2.162c-.337.042-.68.063-1.029.063-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286z"/>
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" id="sun" viewBox="0 0 16 16">
+        <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+      </svg>
+    </button>
+    </nav>
+  </header>
+
+  <ul class="horizontal-media-scroller" id="goplaces" tabindex="-1"></ul>
+</section>
+<footer>
+  <p class="foot">© 2016-<span id="print-year">2022</span> <a  class="foot" target="_blank" rel="noopener" href="https://mobilefirstdesign.ca/">Mobile First Design</a></p>
+</footer>
+<script>
+  let sightsee = [
+    {"place": "Prince Edward Tours", "location": "princeedwardtours.com", "photo": "img1", "info": "6 Prince St - The Charlottetown City Highlights tour is the best way to see and learn about historic and modern-day Charlottetown, the capital of Prince Edward Island. Our guides bring you fun and informative content as you explore the city. Among other places, you'll see historic Province House, Great George National Historic Street, the Lieutenant Governor's House, beautiful Victoria Park along the water, and the University of Prince Edward Island."},
+    {"place": "Walk The Walk Tours", "location": "walkthewalkpei.com", "photo": "img2", "info": "2 Prince St - Hi, I'm Jamie and I will be your guide on the walking tour. The Kelly family has been in the Charlottetown area since 1810.  My wife and I love to travel and when we do, a walking tour of the city we're visiting is always on the top of our list. So now that I am recently retired I would like to  show you around the place that I love , Charlottetown."} ,
+    {"place": "Ride Solar", "location": "www.ridesolar.com", "photo": "img3", "info": "1 Weymouth St Choose from a breakfast cruise, lunch cruises, dinner cruises or a late-night kitchen party cruise. Get ready to admire beautiful views of Charlottetown Harbour and enjoy local flavours on our solar-powered boat - an experience like no other!"},
+    {"place": "MacQueen Bike rentals", "location": "www.macqueens.com", "photo": "img4", "info": "430 Queen Street MacQueen's high quality rental fleet of adult and youth bicycles is professionally maintained after each use. Offering little rolling resistance and an upright position, Deluxe Performance Hybrid bikes are our top pick for recreational rides and combining touring on PEI's roads with hard-packed sections of the Confederation Trail or dirt roads on the Island Walk route. Additional rental equipment options include e-bikes, step-through frames, road bikes, tandems, trailers and trail-a-bikes, car racks, bags and more."},
+    {"place": "Confederation Centre", "location": "confederationcentre.com/theatre-info/", "photo": "img5", "info": "Confederation Centre of the Arts is located in the heart of downtown Charlottetown and is bordered by Grafton, Queen and Richmond Streets. The Box Office is located at the corner of Queen and Grafton Streets and you can also find entrances off Grafton Street's Upper Plaza, Richmond St/Victoria Row and seasonally via the amphitheatre. "},
+    {"place": "Art Gallery", "location": "confederationcentre.com/artgallery/", "photo": "img6", "info": "Each year, the Confederation Centre Art Gallery presents an average of 20 exhibitions of work by Canadian visual artists. The Gallery has four main exhibition halls on two levels, plus smaller exhibition spaces at the entrance and in the concourse of the Centre. In addition, a collection of public sculptures can be found on the esplanades of the Centre. Almost all exhibits are documented and available in our online archives."},
+    {"place": "City Cinema", "location": "citycinema.ca", "photo": "img7", "info": "64 King St - The Charlottetown Film Society endeavours to be an exceptional, sustainable independent cinema which inspires the study, appreciation and celebration of film while supporting the growth of the PEI film community through an enriched program of significant and diverse films."},
+    {"place": "Harbour Hippo", "location": "www.harbourhippo.com", "photo": "img8", "info": "Discover historic Charlottetown by Land & Sea aboard our big wheeled Amphibious vehicle 'The Hippo'. See this beautiful city along it's historic streets then 'splash' into the water for a relaxing harbour cruise. Our 55 minute tour will excite and amaze you!"},
+    {"place": "The Guild Theatre", "location": "theguildpei.ticketpro.ca", "photo": "img9", "info": "155 Kent St - The Guild Charlottetown is a theatre facility that proudly supports emerging and established Island artists with its training and support personnel, while also showcasing the best in local musical performances and visual arts. "},
+    {"place": "Boardwalk", "location": "www.alltrails.com/trail/canada/prince-edward-island/charlottetown-waterfront-boardwalk", "photo": "img10", "info": "4 Queen St - Generally considered an easy route, it takes an average of 1 h 4 min to complete. This trail is great for running and walking, and it's unlikely you'll encounter many other people while exploring. "},
+    {"place": "The Alley", "location": "thealley.ca", "photo": "img11", "info": "200 Richmond St - The Alley is a boutique bowling alley and gastropub in downtown Charlottetown. Big Screen TV's, craft beer and comfort food. Eat. Drink. Bowl."},
+    {"place": "PEI Crafts Council", "location": "www.peicraftscouncil.com", "photo": "img12", "info": "98 Water St - With two floors of handmade craft, the retail gallery is a showcase of the finest examples of craft that Island artists have to offer, allowing visitors to see a wide range of local culture expressed through various mediums of craft."},
+    {"place": "Secrets of Charlotteown", "location": "www.secretsofcharlottetown.com", "photo": "img13", "info": "Queen/Water - When Jessica Eissfeldt struggled to find work after moving to P.E.I. from the prairies, storyteller Jessica Eissfeldt decided to make a business out of uncovering Charlottetown's secrets and sharing them with visitors — one step at a time."},
+    {"place": "Zodiac Boat Tour", "location": "www.adventuresmarine.com", "photo": "img14", "info": "Travel on a rigid hull inflatable Zodiac for the most thrilling 2-hour guided Seal Watching tour Charlottetown has to offer! Wild life sightings include seals, bald eagles and the brown Russian eagles, cormorants, blue herons and a myriad of other shore birds."},
+    {"place": "Anne of Green Gables", "location": "anneofgreengablesthemusical.com", "photo": "img15", "info": "Anne Of Green Gables - The Musical™ is a musical based on the novel, Anne of Green Gables by Lucy Maud Montgomery. The book is by Don Harron, the music is by Norman Campbell and the lyrics by Don Harron, Norman Campbell, Elaine Campbell and Mavor Moore. The musical has been performed continuously ever since 1965."}
+  ]
+  for (let i = 0; i < sightsee.length; i++) {
+        document.getElementById('goplaces').innerHTML += `
+        <li>
+          <a href="http://${sightsee[i].location}" tabindex="-1" target="_blank" rel="noopener">
+            <figure>
+              <figcaption>${sightsee[i].place} 
+                <svg class="svg-icon" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="23 1 23 8 15 1"  />
+      <line x1="20" y1="4" x2="12" y2="12" stroke-width="1px" />
+      <polyline points="10 4 4 4 4 20 20 20 20 12" stroke-width="1" />
+      </svg>
+                </figcaption>
+              <picture>
+                <img alt="${sightsee[i].place}" loading="lazy" width="300" height="225" src="/goplaces/gallery/${sightsee[i].photo}.webp">
+              </picture>
+            </figure>
+          </a>
+          <p class="line-clamp">${sightsee[i].info}</p>
+        </li>
+        `;  
+}
+
+   const toggleModeButton = document.querySelector("#toggle-mode-button");
+  
+  toggleModeButton.addEventListener("click", function() {
+  const metaTag = document.querySelector("meta[name=color-scheme]");
+  const currentValue = metaTag.getAttribute("content");
+  
+  if (currentValue === "light") {
+    metaTag.setAttribute("content", "dark");
+    document.getElementById("sun").style.display = "block";
+    document.getElementById("moon").style.display = "none";
+  } else {
+    metaTag.setAttribute("content", "light");
+    document.getElementById("sun").style.display = "none";
+    document.getElementById("moon").style.display = "block";
+  }
+  });
+    
+  let currentYear = new Date().getFullYear();
+document.getElementById("print-year").innerHTML = currentYear;
+</script>
+<!--script>
+  let darkMode = localStorage.getItem('darkMode'); 
+const darkModeToggle = document.querySelector('#dark-mode-toggle');
+const enableDarkMode = () => {
+  document.body.classList.add('darkmode');
+  localStorage.setItem('darkMode', 'enabled');
+}
+const disableDarkMode = () => {
+  document.body.classList.remove('darkmode');
+  localStorage.setItem('darkMode', null);
+}
+if (darkMode === 'enabled') {
+  enableDarkMode();
+}
+darkModeToggle.addEventListener('click', () => {
+  darkMode = localStorage.getItem('darkMode'); 
+  if (darkMode !== 'enabled') {
+    enableDarkMode();
+  } else {  
+    disableDarkMode(); 
+  }
+});
+
+</script-->
+  </body>
+</html>
