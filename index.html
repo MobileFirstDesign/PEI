@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>PEI trip</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Places to eat and things to do in Charlottetowm PEI">
+  <meta name="author" content="Mike Bryan">
+  <meta name="publisher" content="https://mfn.ca/">
+  <meta name="robots" content="index,follow">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#00539f"/>
+  <meta name="application-name" content="PEI-Eat-See">
+  <meta name="apple-mobile-web-app-title" content="PEI-Eat-See">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#00539f">
+  <link rel="apple-touch-icon" sizes="196x196" href="/img/maskable_384.png">
+  <link rel="apple-touch-startup-image" href="/img/apple-splash.png">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="/pei.webmanifest">
+
+    <style>
+      :root {
+        --theme-color: rgb(0, 83, 159);
+        --font-color: #000;
+        --bkg-color: #fff;
+        --image-filter: 0%;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --theme-color: rgb(0, 83, 159);
+          --font-color: #fff;
+          --bkg-color: #333;
+          --image-filter: grayscale(50%);
+        }
+        img:not([src*=".svg"]) {
+            filter: var(--image-filter);
+          }
+      }
+      .darkmode {
+        --theme-color: rgb(0, 83, 159);
+        --subtheme-clr: rgb(143, 176, 225);
+        --background: var(--clr-dark);
+        --foreground: var(--clr-light);
+        --image-filter: 50%;
+    }
+      *,
+      *::before,
+      *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      }
+      html {
+      font-size: 20px;
+      line-height: 1.7;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      height: 100%;
+      font-weight: 400;
+      scroll-behavior: smooth;
+      }
+      img {max-width: 100%;}
+
+      body {max-width: 480px; margin: 0 auto; background: var(--bkg-color);}
+      .container {
+        display: grid;
+        grid-template-columns: repeat(3,  minmax(125px, 1fr));
+        grid-template-rows: repeat(6, 1fr); 
+      }
+      .hero-image {
+       
+        background: url(/img/goose.webp) #1f1f1f no-repeat center center /*fixed*/;
+        background-size:cover; height:100vh; /*background-size: cover; height: 100%;*/
+        filter: grayscale(var(--image-filter));
+      }
+
+      .item {
+        outline: 1px solid var(--bkg-color);
+        /*height:16.67vh;*/
+            
+      }
+      .center   {display: flex; justify-content: center; align-items: center; height: 100%; width:100%;}
+      .b-link {text-decoration: none; cursor: pointer;color:#fff;text-shadow: 2px 2px 4px #000000;}
+      .b-link:hover, .b-link:focus {background-color: rgba(255, 255, 255, 0.5);}
+      .head     {grid-area: 1 / 2 / 2 / 3; } h1 { font-size: 20px; font-weight: bold;color:rgba(255, 248, 248, 0.8);text-shadow: 2px 2px 4px #000000;text-align: center;}
+      .city     {grid-area: 2 / 1 / 3 / 2; color: #fff; font-size: 16px; font-weight: bold;text-transform: uppercase;text-align: center;}
+      .year     {grid-area: 2 / 2 / 3 / 3; color: rgba(255, 248, 248, 0.5); font-size: 64px;font-family: arial; font-weight: 700;text-align: center;}
+      .date     {grid-area: 2 / 3 / 3 / 4; color: #fff; font-size: 16px; font-weight: bold;text-transform: uppercase; }
+      /*.speak    {grid-area: 3 / 1 / 4 / 2;}
+      .prgm     {grid-area: 3 / 2 / 4 / 3;}
+      .post     {grid-area: 3 / 3 / 4 / 4;}
+      .eats     {grid-area: 4 / 1 / 5 / 2;}
+      .sights   {grid-area: 4 / 2 / 5 / 3;}
+      .notes    {grid-area: 4 / 3 / 5 / 4;}*/
+      .eats     {grid-area: 6 / 1 / 7 / 2;}
+      .see    {grid-area: 6 / 2 / 7 / 3;}
+      .find    {grid-area: 6 / 3 / 7 / 4;}
+      /*.dark     {grid-area: 1/3 /2/4;}*/
+
+    </style>
+</head>
+<body>
+<main class="container hero-image">
+  <div class="item"></div>
+  <div class="item head"><h1 class="center" title="conference speakers link">&nbsp;Charlottetown<br>Trip<br>&nbsp;&nbsp;2023</h1></div>
+  <div class="item dark" id="dark-mode-toggle"></div>
+
+  <div class="item city center"></div>
+  <div class="item year center"></div>
+  <div class="item date center"></div>
+
+  <div class="item"></div>
+  <div class="item"></div>
+  <div class="item"></div>
+
+  <div class="item"></div>
+  <div class="item"></div>
+  <div class="item"></div>
+  
+  <div class="item"></div>
+  <div class="item"></div>
+  <div class="item"></div>
+
+  <div class="item eats"><a href="/eats/" class="b-link center" title="local cuesine">Eat</a></div>
+  <div class="item see"><a href="/goplaces/" class="b-link center" title="local sights">See</a></div>
+  <div class="item find"><a href="/map/" class="b-link center" title="currency exchange">Map</a-></div>
+</main>
+<script>
+  if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('/sw_cached_pages.js').then(reg=>console.log('Service Worker: Registered')).catch(err=>console.log(`Service Worker: Error: ${err}`))})}
+</script>
+</body>
+</html>
