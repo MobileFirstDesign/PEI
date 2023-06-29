@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>16IHC is offline</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Currency exchange based on Bank of Canada">
+  <meta name="author" content="Mike Bryan">
+  <meta name="publisher" content="https://mfn.ca/">
+  <meta name="robots" content="index,follow">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#00539f"/>
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="16th IHC">
+  <meta name="apple-mobile-web-app-title" content="16th IHC">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#00539f">
+  <meta name="msapplication-starturl" content="/index.html">
+  <meta name="msapplication-TileColor" content="#00539f">
+  <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+  <link rel="apple-touch-startup-image" href="/img/apple-splash.png">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="/16ihc-manifest.json">
+    <style>
+        :root {
+      --theme-color: rgb(0, 83, 159);
+      --subtheme-clr: rgb(143, 176, 225);
+      --clr-light: rgb(250, 250, 250);
+      --clr-dark: rgb(53, 54, 58);
+      --foreground: var(--clr-dark);
+      --background: var(--clr-light);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --theme-color: rgb(0, 83, 159);
+        --subtheme-clr: rgb(143, 176, 225);
+        --background: var(--clr-dark);
+        --foreground: var(--clr-light);
+      }
+    }
+    .darkmode {
+        --theme-color: rgb(0, 83, 159);
+        --subtheme-clr: rgb(143, 176, 225);
+        --background: var(--clr-dark);
+        --foreground: var(--clr-light);
+    }
+    *, *::before, *::after {box-sizing: inherit;padding: 0;margin: 0;}
+    html {font-size: 20px;line-height: 1.7;font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;height: 100%;font-weight: 400;}
+    body {padding:0;min-height: 100%; display: grid; grid-template-columns: 1fr; 
+      justify-content: space-between;align-content: space-between;background:var(--background);
+} 
+   header {
+    z-index: 10;
+    position: fixed;
+    width: 100%;
+    height: 30px;
+    background: var(--theme-color);
+    box-shadow: 0 2px 4px rgb(0 0 0 / 50%);
+}
+.head {
+    max-width: 960px;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    color: var(--background);
+    align-items: center;
+    justify-content: space-between;
+}
+.home {
+    padding-top: 8px;
+}
+.target-area {
+    padding: 3px 12px;
+    cursor: pointer;
+}
+h1 {
+    font-size: 1rem;
+    line-height: 1.0;
+    color: var(--clr-light);
+}
+.icon {
+    fill: none;
+    stroke: var(--clr-light);
+    stroke-width: 2;
+}
+.svg-circle {
+    fill: var(--foreground);
+    stroke: black;
+    stroke-width: 2px;
+}
+.svg-half {
+    fill: var(--background);
+}
+.dark-mode-toggle {
+    background: transparent;
+    border: transparent;
+}
+    .btn-toggle {padding:10px 10px 0 10px; background: transparent;border: transparent; cursor: pointer;}
+    main {max-width:960px;margin:0 auto;font-size: 1rem;line-height: 1.2;color:var(--foreground);}
+    .svg {
+    width: 24px;
+    height: 24px;
+}
+.center {text-align: center;}
+footer, .foot {color:var(--foreground);}
+</style>
+</head>
+<body>
+  <header>
+        <nav class="head">
+            <a class="home" href="/" title="link to homepage">
+              <svg class="svg target-area">
+                <polyline class="icon" points="21 23, 14 23, 14 14, 10 14, 10 23 3 23, 3 10, 2 10, 12 0, 22 10, 21 10, 21 23"></polyline>
+              </svg>
+            </a>
+            <h1 class="text-center">off-line</h1>
+            <button id="dark-mode-toggle" class="dark-mode-toggle" type="button" title="toggle dark theme"><!-- class="theme-toggle" onclick="btnToggle()"-->
+                <svg class="target-area" width="24px" height="24px">
+                    <circle cx="12.5" cy="12.5" r="12.5" class="svg-circle"></circle>
+                    <path d="M12.5,0 a1,1 0 0,0 0,25" class="svg-half"></path>
+                </svg>
+            </button>
+        </nav>
+      </header>
+    <div>&nbsp;</div>
+    <main>
+      <h2 class="center">You are off-line</h2>
+      <p>The information you requested require you to be online. Make sure you have a network connection.</p>
+    </main>
+    <footer class="center">
+      <p class="foot">© 2016-<span id="print-year">2021</span> <a  class="foot" target="_blank" rel="noopener" href="http://complexcarbohydrateconsortium.com/">ICCC</a></p>
+    </footer>
+  </main>
+  <script>
+    //        if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker .register('/sw_cached_pages.js') .then(reg => console.log('Service Worker: Registered (Pages)')) .catch(err => console.log(`Service Worker: Error: ${err}`)); }); }
+    //        function btnToggle(){ var element = document.body; element.classList.toggle("dark-mode");}
+    //onClick={() => setTheme((cur) => (cur === "light" ? "dark" : "light"))
+    // check for saved 'darkMode' in localStorage
+    let darkMode = localStorage.getItem('darkMode'); 
+    const darkModeToggle = document.querySelector('#dark-mode-toggle');
+    const enableDarkMode = () => {
+      document.body.classList.add('darkmode');
+      localStorage.setItem('darkMode', 'enabled');
+    }
+    const disableDarkMode = () => {
+      document.body.classList.remove('darkmode');
+      localStorage.setItem('darkMode', null);
+    }
+    if (darkMode === 'enabled') {
+      enableDarkMode();
+    }
+    darkModeToggle.addEventListener('click', () => {
+      darkMode = localStorage.getItem('darkMode'); 
+      if (darkMode !== 'enabled') {
+        enableDarkMode();
+      } else {  
+        disableDarkMode(); 
+      }
+    });
+    var currentYear = new Date().getFullYear();
+                document.getElementById("print-year").innerHTML = currentYear;
+                
+    (function(document){'use strict';var LightTableFilter=(function(Arr){var _input;function _onInputEvent(e){_input=e.target;var tables=document.getElementsByClassName(_input.getAttribute('data-table'));Arr.forEach.call(tables,function(table){Arr.forEach.call(table.tBodies,function(tbody){Arr.forEach.call(tbody.rows,_filter)})})}
+        function _filter(row){var text=row.textContent.toLowerCase(),val=_input.value.toLowerCase();row.style.display=text.indexOf(val)===-1?'none':'table-row'}
+        return{init:function(){var inputs=document.getElementsByClassName('light-table-filter');Arr.forEach.call(inputs,function(input){input.oninput=_onInputEvent})}}})(Array.prototype);document.addEventListener('readystatechange',function(){if(document.readyState==='complete'){LightTableFilter.init()}})})(document)
+    
+    </script>
+</body>
+</html>
