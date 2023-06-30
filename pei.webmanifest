@@ -1,8 +1,8 @@
-{
+I{
   "name": "What to Eat and Do in Charlottetown",
   "short_name": "PEI See Do",
   "start_url": "/PEI/index.html",
-  "scope": "/",
+  "scope": "/PEI/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#ffffff",
