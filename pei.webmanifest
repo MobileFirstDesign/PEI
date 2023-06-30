@@ -1,8 +1,8 @@
 {
   "name": "What to Eat and Do in Charlottetown",
   "short_name": "PEI See Do",
-  "start_url": "/index.html",
-  "scope": "https://mobilefirstdesign.github.io./PEI/",
+  "start_url": "/PEI/index.html",
+  "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#ffffff",
