@@ -1,13 +1,13 @@
-const cacheName = 'v2';
+const cacheName = 'v3';
 
 const cacheAssets = [
-  '/index.html',
-  '/eats/img2.webp',
-  '/goplaces/gallery/img1.webp',
-  '/eats/index.html',
-  '/goplaces/index.html',
-  '/map/index.html',
-  '/offline.html'
+  '/PEI/index.html',
+  '/PEI/eats/img2.webp',
+  '/PEI/goplaces/gallery/img1.webp',
+  '/PEI/eats/index.html',
+  '/PEI/goplaces/index.html',
+  '/PEI/map/index.html',
+  '/PEI/offline.html'
 ];
 
 
