@@ -1,13 +1,13 @@
 self.addEventListener('install', (e) => {
   e.waitUntil(
-    caches.open('fox-store').then((cache) => cache.addAll([
-      '/index.html',
-      '/eats/img2.webp',
-      '/goplaces/gallery/img1.webp',
-      '/eats/index.html',
-      '/goplaces/index.html',
-      '/map/index.html',
-      '/offline.html',
+    caches.open('fox-store2').then((cache) => cache.addAll([
+      '/PEI/index.html',
+      '/PEI/eats/img2.webp',
+      '/PEI/goplaces/gallery/img1.webp',
+      '/PEI/eats/index.html',
+      '/PEI/goplaces/index.html',
+      '/PEI/map/index.html',
+      '/PEI/offline.html',
     ])),
   );
 });
